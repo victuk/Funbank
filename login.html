@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/style.css" id="main-styles-link">
-    <script src=”https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <!--[if lt IE 10]>
     <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;"><a href="https://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
@@ -111,8 +111,11 @@
                             <label class="form-label" for="houseAddress">House Address</label>
                           </div>
                           <div class="form-wrap">
-                            <input class="form-input" id="country" type="country" name="country" data-constraints="@Required">
-                            <label class="form-label" for="country">Country</label>
+                            <select class="form-input" name="country" id="country" type="country" data-constraints="@Required">
+                              <option value="">Country</option>
+                            </select>
+                            <!-- <input class="form-input" id="country" type="country" name="country" data-constraints="@Required"> -->
+                            <!-- <label class="form-label" for="country">Country</label> -->
                           </div>
                           <div class="form-wrap">
                             <input class="form-input" id="phoneNumber" type="tel" name="phone number" data-constraints="@Required">
@@ -131,7 +134,7 @@
                             <label class="form-label" for="register-confirm-password">Confirm Password</label>
                           </div>
                           
-                          <button class="button button-lg button-round button-block button-primary" type="submit">Register</button>
+                          <button class="button button-lg button-round button-block button-primary" id="registerButton">Register</button>
                         </form>
                         <!-- <div class="group-sm group-sm-justify group-middle social-items"><span>or use</span><a class="icon icon-lg icon-gray-100 novi-icon fa fa-facebook" href="#"></a><a class="icon icon-lg icon-gray-100 novi-icon fa fa-twitter" href="#"></a></div> -->
                       </div>
@@ -181,6 +184,59 @@
     <!-- Javascript-->
     <script src="js/core.min.js"></script>
     <script src="js/script.js"></script>
+    <script src="./js/defaults.js"></script>
+    <script>
+      
+
+        const registerEmail = document.getElementById("register-email");
+        const houseAddress = document.getElementById("houseAddress");
+        let country = document.getElementById("country");
+        const phoneNumber = document.getElementById("phoneNumber");
+        let formFile = document.getElementById("formFile").files[0];
+        const registerPassword = document.getElementById("register-password");
+        const registerConfirmPassword = document.getElementById("register-confirm-password");
+        const registerButton = document.getElementById("registerButton");
+
+        
+        (
+          function allCountries () {
+          fetch("https://restcountries.com/v2/all").then(async (response) => {
+            
+            if(response.status == 200) {
+              const data = await response.json();
+              for (let countrydata of data) {
+                country.innerHTML += `<option value="${countrydata.name}">${countrydata.name}</option>`;
+              }
+            }
+          }).catch(e => {
+            console.log(e);
+          });
+        }
+        )();
+        
+        registerButton.addEventListener("click", function(e) {
+          e.preventDefault();
+          const form = new FormData();
+          form.append("uploadid", formFile);
+          form.append("email", registerEmail.value);
+          form.append("homeAddress", houseAddress.value);
+          form.append("country", country.value);
+          form.append("phone", phoneNumber.value);
+          form.append("password", registerPassword.value);
+
+          fetch(baseUrl + "auth/register", {
+            method: "POST",
+            body: form
+          }).then(async (response) => {
+            if(response.status == 201) {
+              const data = await response.json();
+              console.log(data);
+            }
+          }).catch(e => {
+            console.log(e);
+          });
+        });
+    </script>
 
 </body>
 </html>
