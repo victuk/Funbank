@@ -2863,7 +2863,7 @@
                     />
                   </div>
                   <div class="text-white">
-                    <p class="text-lg font-semibold tracking-wide">$92,860</p>
+                    <p class="text-lg font-semibold tracking-wide" id="balance">$0</p>
                     <p class="mt-1 text-xs font-medium">**** **** **** 8945</p>
                   </div>
                   <div
@@ -2918,8 +2918,6 @@
                     Send Money
                   </h2>
                   <div
-                    x-data="usePopper({placement:'bottom-end',offset:4})"
-                    @click.outside="if(isShowPopper) isShowPopper = false"
                     class="inline-flex"
                   >
                     <button
@@ -2991,7 +2989,7 @@
                   </div>
                 </div>
 
-                <div class="flex space-x-2">
+                <!-- <div class="flex space-x-2">
 
                   <div class="avatar h-8 w-8 hover:z-10">
                     <div
@@ -3009,9 +3007,9 @@
                     </div>
                   </div>
 
-                </div>
+                </div> -->
 
-                <div class="mt-2 flex items-center justify-between">
+                <!-- <div class="mt-2 flex items-center justify-between">
                   <p class="text-xs+">View All Contacts</p>
 
                   <button
@@ -3032,53 +3030,47 @@
                       />
                     </svg>
                   </button>
-                </div>
+                </div> -->
+
                 <div class="mt-2 space-y-4">
                   <label class="block">
-                    <span class="text-xs+">Pay to</span>
+                    <span class="text-xs+">Pay to (account number)</span>
                     <input
-                      x-input-mask="{
-                            creditCard: true
-                        }"
                       class="form-input mt-1.5 h-9 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
                       placeholder="**** **** **** ****"
                       type="text"
+                      id="sendToAccountNumber"
                     />
                   </label>
                   <div>
                     <span class="text-xs+">Amount</span>
 
                     <div class="mt-1.5 flex h-9 -space-x-px">
-                      <select
-                        class="form-select rounded-l-lg border border-slate-300 bg-white px-3 py-2 pr-9 hover:z-10 hover:border-slate-400 focus:z-10 focus:border-primary dark:border-navy-450 dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent"
-                      >
-                        <option>$</option>
-                        <option>£</option>
-                        <option>€</option>
-                      </select>
                       <input
-                        class="form-input w-full rounded-r-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:z-10 hover:border-slate-400 focus:z-10 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                        placeholder="Price"
+                        class="form-input w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:z-10 hover:border-slate-400 focus:z-10 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                        placeholder="Amount to send"
                         type="text"
+                        id="sendAmountValue"
                       />
                     </div>
                   </div>
                 </div>
-                <div
+                <!-- <div
                   class="mt-5 flex justify-between text-slate-400 dark:text-navy-300"
                 >
                   <p class="text-xs+">Commission:</p>
                   <p>3$</p>
-                </div>
+                </div> -->
                 <div class="mt-2 flex justify-between">
                   <p>Total:</p>
                   <p class="font-medium text-slate-700 dark:text-navy-100">
-                    3$
+                    $<span id="totalAmountUpdate">0</span>
                   </p>
                 </div>
 
                 <button
                   class="btn mt-5 h-10 w-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90"
+                  onclick="sendMoney()"
                 >
                   Send Money
                 </button>
@@ -3097,26 +3089,9 @@
                 </div>
                 <p class="mt-16">Balance</p>
                 <p class="mt-2 font-medium text-slate-700 dark:text-navy-100">
-                  <span class="text-2xl">$100,000</span
-                  ><span class="text-base">.0k</span>
+                  <span class="text-2xl" id="balancetwo">$0</span>
                 </p>
-                <p class="mt-1 flex items-center text-xs text-success">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-4 w-4 text-success"
-                    fill="none"
-                    viewbox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M7 11l5-5m0 0l5 5m-5-5v12"
-                    />
-                  </svg>
-                  <span>4.3%</span>
-                </p>
+                
               </div>
               <div class="card p-4 sm:p-5">
                 <div
@@ -3139,26 +3114,10 @@
                 </div>
                 <p class="mt-16">Expense</p>
                 <p class="mt-2 font-medium text-slate-700 dark:text-navy-100">
-                  <span class="text-2xl">$7140</span
-                  ><span class="text-base">.0k</span>
-                </p>
-                <p class="mt-1 flex items-center text-xs text-error">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-4 w-4 text-error"
-                    fill="none"
-                    viewbox="0 0 24 24"
-                    stroke="currentColor"
+                  <span class="text-2xl">$0</span
                   >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M17 13l-5 5m0 0l-5-5m5 5V6"
-                    />
-                  </svg>
-                  <span>1.9%</span>
                 </p>
+               
               </div>
               <div class="card p-4 sm:p-5">
                 <div
@@ -3168,25 +3127,8 @@
                 </div>
                 <p class="mt-16">Total Number of Users</p>
                 <p class="mt-2 font-medium text-slate-700 dark:text-navy-100">
-                  <span class="text-2xl">1,300</span>
+                  <span class="text-2xl" id="totalUsers">0</span>
                   <!-- <span class="text-base"></span> -->
-                </p>
-                <p class="mt-1 flex items-center text-xs text-success">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-4 w-4 text-success"
-                    fill="none"
-                    viewbox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M7 11l5-5m0 0l5 5m-5-5v12"
-                    />
-                  </svg>
-                  <span>7.11%</span>
                 </p>
               </div>
               <div class="card p-4 sm:p-5">
@@ -3210,25 +3152,8 @@
                 </div>
                 <p class="mt-16">Saving</p>
                 <p class="mt-2 font-medium text-slate-700 dark:text-navy-100">
-                  <span class="text-2xl">$20,000</span
-                  ><span class="text-base">.0k</span>
-                </p>
-                <p class="mt-1 flex items-center text-xs text-success">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-4 w-4 text-success"
-                    fill="none"
-                    viewbox="0 0 24 24"
-                    stroke="currentColor"
+                  <span class="text-2xl">$0</span
                   >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M7 11l5-5m0 0l5 5m-5-5v12"
-                    />
-                  </svg>
-                  <span>3.47%</span>
                 </p>
               </div>
               <div class="card col-span-2 px-4 pb-5 sm:px-5">
@@ -3245,117 +3170,9 @@
                     View All
                   </a>
                 </div>
-                <div class="space-y-4">
-                  <div class="flex cursor-pointer items-center justify-between">
-                    <div class="flex items-center space-x-3">
-                      <div class="avatar">
-                        <img
-                          class="rounded-full"
-                          src="images/avatar/avatar-20.jpg"
-                          alt="avatar"
-                        />
-                      </div>
-                      <div>
-                        <p class="text-slate-700 dark:text-navy-100">
-                          Peter Obi
-                        </p>
-                        <p
-                          class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
-                        >
-                          March 21, 2022 - 08:05
-                        </p>
-                      </div>
-                    </div>
-                    <p class="font-medium text-success">$660.22</p>
-                  </div>
-                  <div class="flex cursor-pointer items-center justify-between">
-                    <div class="flex items-center space-x-3">
-                      <div class="avatar">
-                        <img
-                          class="rounded-full"
-                          src="images/avatar/avatar-19.jpg"
-                          alt="avatar"
-                        />
-                      </div>
-                      <div>
-                        <p class="text-slate-700 dark:text-navy-100">
-                          Henry Justice
-                        </p>
-                        <p
-                          class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
-                        >
-                          April 12, 2022 - 11:55
-                        </p>
-                      </div>
-                    </div>
-                    <p class="font-medium text-success">$33.63</p>
-                  </div>
-                  <div class="flex cursor-pointer items-center justify-between">
-                    <div class="flex items-center space-x-3">
-                      <div class="avatar">
-                        <img
-                          class="rounded-full"
-                          src="images/avatar/avatar-18.jpg"
-                          alt="avatar"
-                        />
-                      </div>
-                      <div>
-                        <p class="text-slate-700 dark:text-navy-100">
-                          Dennis Simeon
-                        </p>
-                        <p
-                          class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
-                        >
-                          May 16, 2022 - 14:45
-                        </p>
-                      </div>
-                    </div>
-                    <p class="font-medium text-success">$674.63</p>
-                  </div>
-                  <div class="flex cursor-pointer items-center justify-between">
-                    <div class="flex items-center space-x-3">
-                      <div class="avatar">
-                        <img
-                          class="rounded-full"
-                          src="images/avatar/avatar-11.jpg"
-                          alt="avatar"
-                        />
-                      </div>
-                      <div>
-                        <p class="text-slate-700 dark:text-navy-100">
-                          Kabem Elisha
-                        </p>
-                        <p
-                          class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
-                        >
-                          June 13, 2022 - 11:30
-                        </p>
-                      </div>
-                    </div>
-                    <p class="font-medium text-error">$547.63</p>
-                  </div>
-                  <div class="flex cursor-pointer items-center justify-between">
-                    <div class="flex items-center space-x-3">
-                      <div class="avatar">
-                        <img
-                          class="rounded-full"
-                          src="images/avatar/avatar-7.jpg"
-                          alt="avatar"
-                        />
-                      </div>
-                      <div>
-                        <p class="text-slate-700 dark:text-navy-100">
-                          Roselyn Ejaka
-                        </p>
-                        <p
-                          class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
-                        >
-                          July 10, 2022 - 09:41
-                        </p>
-                      </div>
-                    </div>
-                    <p class="font-medium text-success">$736.24</p>
-                  </div>
+                <div class="space-y-4" style="height: 280px; overflow-y: auto;" id="transactionsSection">
+                  
+                 
                 </div>
               </div>
               <div class="card col-span-2">
@@ -3449,7 +3266,12 @@
             </div>
           </div>
         </div>
-        <div class="col-span-12 lg\:col-span-12 mt-10">
+
+
+
+
+
+        <!-- <div class="col-span-12 lg\:col-span-12 mt-10">
           <div class="card col-span-12 px-4 pb-5 sm:px-5">
             <div class="my-3 flex h-8 items-center justify-between">
               <h2
@@ -3542,7 +3364,11 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
+
+
+
+
       </main>
     </div>
     <!-- 
@@ -3550,8 +3376,122 @@
         @see https://alpinejs.dev/directives/teleport
       -->
     <div id="x-teleport-target"></div>
+    <script src="../../js/defaults.js"></script>
     <script>
       window.addEventListener("DOMContentLoaded", () => Alpine.start());
+
+      let bal = document.getElementById("balance");
+      let baltwo = document.getElementById("balancetwo");
+      let sendToAccountNumber = document.getElementById("sendToAccountNumber");
+      let sendAmountValue = document.getElementById("sendAmountValue");
+      let totalUsers = document.getElementById("totalUsers");
+      let totalAmountUpdate = document.getElementById("totalAmountUpdate");
+      let transactionsSection = document.getElementById("transactionsSection");
+
+      async function getDashboardComp() {
+        const res = await fetch(baseUrl + "users/adminprofile", {
+          method: "GET",
+          headers: {
+            accesstoken: localStorage.getItem("Authorization")
+          }
+        });
+
+        const details = await res.json();
+
+        console.log(details);
+        bal.innerText = details.adminBalance;
+        baltwo.innerText = details.adminBalance;
+
+        const userCount = await fetch(baseUrl + "users/userscount", {
+          method: "GET",
+          headers: {
+            accesstoken: localStorage.getItem("Authorization")
+          }
+        });
+
+        const userCountDetails = await userCount.json();
+
+        console.log(userCountDetails);
+        totalUsers.innerText = userCountDetails;
+
+      }
+
+      getDashboardComp();
+
+
+      function showTransactions(t) {
+
+        transactionsSection.innerHTML = "";
+
+        console.log(t);
+
+        for(i = 0; i <t.length; i++) {
+          transactionsSection.innerHTML +=`
+        <div class="flex cursor-pointer items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                      <div>
+                        <p class="text-slate-700 dark:text-navy-100">
+                          ${t[i].from.firstName} ${t[i].from.lastName}
+                        </p>
+                        <p
+                          class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
+                        >
+                          ${t[0].createdAt}
+                        </p>
+                      </div>
+                    </div>
+                    <p class="font-medium text-success">${t[i].amount}</p>
+                  </div>
+        `;
+        }
+      }
+
+
+      async function getTransactions() {
+        let transactions = await fetch(baseUrl + "bill/transactions", {
+          method: "GET",
+          headers: {
+            accesstoken: localStorage.getItem("Authorization")
+          },
+        });
+
+        let allTransactions = await transactions.json();
+
+        showTransactions(allTransactions.reverse());
+      }
+
+      getTransactions();
+
+      async function sendMoney() {
+        let result = await fetch(baseUrl + "bill/sendcash", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            accesstoken: localStorage.getItem("Authorization")
+          },
+          body: JSON.stringify({
+            accountNumber: sendToAccountNumber.value,
+            sendValue: sendAmountValue.value
+          })
+        });
+
+        const v = await result.json();
+        console.log(v);
+        showTransactions(v.transactions.reverse());
+        bal.innerText = v.newAdminBalance;
+        baltwo.innerText = v.newAdminBalance;
+      }
+
+
+      sendAmountValue.addEventListener("keyup", function(e) {
+        if(e.target.value == "" || isNaN(e.target.value)) {
+          totalAmountUpdate.innerText = 0;
+          return;
+        }
+        totalAmountUpdate.innerText = e.target.value;
+        
+      });
+
     </script>
   </body>
 </html>

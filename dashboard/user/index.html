@@ -2854,86 +2854,14 @@
               <div class="px-4 text-white sm:px-5">
                 <div class="-mt-1 flex items-center space-x-2">
                   <h2 class="text-base font-medium tracking-wide">Welcome User</h2>
-                  <div
-                    x-data="usePopper({placement:'bottom-end',offset:4})"
-                    @click.outside="if(isShowPopper) isShowPopper = false"
-                    class="inline-flex"
-                  >
-                    <button
-                      x-ref="popperRef"
-                      @click="isShowPopper = !isShowPopper"
-                      class="btn h-8 w-8 rounded-full p-0 hover:bg-white/20 focus:bg-white/20 active:bg-white/25"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-5 w-5"
-                        fill="none"
-                        viewbox="0 0 24 24"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
-                        />
-                      </svg>
-                    </button>
-
-                    <div
-                      x-ref="popperRoot"
-                      class="popper-root"
-                      :class="isShowPopper && 'show'"
-                    >
-                      <div
-                        class="popper-box rounded-md border border-slate-150 bg-white py-1.5 font-inter dark:border-navy-500 dark:bg-navy-700"
-                      >
-                        <ul>
-                          <li>
-                            <a
-                              href="#"
-                              class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100"
-                              >Action</a
-                            >
-                          </li>
-                          <li>
-                            <a
-                              href="#"
-                              class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100"
-                              >Another Action</a
-                            >
-                          </li>
-                          <li>
-                            <a
-                              href="#"
-                              class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100"
-                              >Something else</a
-                            >
-                          </li>
-                        </ul>
-                        <div
-                          class="my-1 h-px bg-slate-150 dark:bg-navy-500"
-                        ></div>
-                        <ul>
-                          <li>
-                            <a
-                              href="#"
-                              class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100"
-                              >Separated Link</a
-                            >
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
                 </div>
 
                 <div class="mt-3">
-                  <p class="text-2xl font-semibold">$6,556.55</p>
-                  <p class="text-xs">+ 3.5%</p>
+                  <p class="text-2xl font-semibold">$<span class="accountBalance"></span></p>
+                  <!-- <p class="text-xs">+ 3.5%</p> -->
                 </div>
 
-                <div class="mt-4 flex space-x-7">
+                <!-- <div class="mt-4 flex space-x-7">
                   <div>
                     <p class="text-indigo-100">Income</p>
                     <div class="mt-1 flex items-center space-x-2">
@@ -2955,7 +2883,7 @@
                           />
                         </svg>
                       </div>
-                      <p class="text-base font-medium">$2,225.22</p>
+                      <p class="text-base font-medium">$<span id="income"></span></p>
                     </div>
                   </div>
                   <div>
@@ -2979,10 +2907,10 @@
                           />
                         </svg>
                       </div>
-                      <p class="text-base font-medium">$225.22</p>
+                      <p class="text-base font-medium">$<span id="expense"></span></p>
                     </div>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
 
@@ -3014,7 +2942,7 @@
                             </div>
                             <div class="text-white">
                               <p class="text-lg font-semibold tracking-wide">
-                                $1,686.66
+                                $<span class="accountBalance"></span>
                               </p>
                               <p class="mt-1 text-xs font-medium">
                                 **** **** **** 7946
@@ -3465,8 +3393,76 @@
         @see https://alpinejs.dev/directives/teleport
       -->
     <div id="x-teleport-target"></div>
+
+    <script src="../../js/defaults.js"></script>
     <script>
       window.addEventListener("DOMContentLoaded", () => Alpine.start());
+
+      let accountBalance = document.querySelectorAll(".accountBalance");
+      let income = document.getElementById("income");
+      let expense = document.getElementById("expense");
+
+      function getDashboardComponents() {
+
+        fetch(baseUrl + "bill/accountbalance", {
+          method: "GET",
+          headers: {
+            accesstoken: localStorage.getItem("Authorization")
+          }
+        }).then(async (response) => {
+          const data = await response.json();
+
+          console.log(data);
+
+          console.log(data.userBalance);
+          console.log(localStorage.getItem("auth"));
+          
+          if(response.status == 200) {
+            accountBalance.forEach(bal => {
+              bal.innerHTML = data.userBalance
+            });
+          }
+
+        }).catch(e => {
+          console.log(e);
+        });
+
+
+
+        fetch(baseUrl + "bill/history", {
+          method: "GET",
+          headers: {
+            accesstoken: localStorage.getItem("Authorization")
+          }
+        }).then(async (response) => {
+
+          const data = await response.json();
+
+          if(response.status == 200) {
+            console.log(data);
+
+            if(data.income.length == 0) {
+              income.innerHTML = 0;
+            }
+
+            if(data.expenses.length == 0) {
+              expense.innerHTML = 0;
+            }
+
+            if(data.accountHistory.length == 0) {
+              income.innerHTML = 0;
+              expense.innerHTML = 0;
+              return;
+            }
+          }
+        }).catch(e => {
+          console.log(e);
+        });
+
+      }
+
+      getDashboardComponents();
+
     </script>
   </body>
 </html>
