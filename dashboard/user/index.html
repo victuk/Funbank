@@ -50,8 +50,7 @@
           >
             <!-- Application Logo -->
             <div class="flex pt-4">
-              <a href="#">FunBank
-              </a>
+              <a href="#">FunBank </a>
             </div>
 
             <!-- Main Sections Links -->
@@ -159,6 +158,7 @@
                           class="rounded-full"
                           src="images/avatar/avatar-12.jpg"
                           alt="avatar"
+                          class="profileImage"
                         />
                       </div>
                       <div>
@@ -166,7 +166,7 @@
                           href="#"
                           class="text-base font-medium text-slate-700 hover:text-primary focus:text-primary dark:text-navy-100 dark:hover:text-accent-light dark:focus:text-accent-light"
                         >
-                          VickTuk
+                          User
                         </a>
                         <p class="text-xs text-slate-400 dark:text-navy-300">
                           DevOps Relation
@@ -210,8 +210,7 @@
                           </div>
                         </div>
                       </a>
-                      
-                      
+
                       <a
                         href="#"
                         class="group flex items-center space-x-3 py-2 px-4 tracking-wide outline-none transition-all hover:bg-slate-100 focus:bg-slate-100 dark:hover:bg-navy-600 dark:focus:bg-navy-600"
@@ -359,11 +358,9 @@
               class="h-[calc(100%-4.5rem)] overflow-x-hidden pb-6"
               x-init="$el._x_simplebar = new SimpleBar($el);"
             >
-              <ul class="flex flex-1 flex-col px-4 font-inter">
-              </ul>
+              <ul class="flex flex-1 flex-col px-4 font-inter"></ul>
               <div class="my-3 mx-4 h-px bg-slate-200 dark:bg-navy-500"></div>
               <ul class="flex flex-1 flex-col px-4 font-inter">
-
                 <li x-data="accordionItem('menu-item-2')">
                   <a
                     :class="expanded && 'text-slate-800 font-semibold dark:text-navy-50'"
@@ -406,7 +403,6 @@
                     </li>
                   </ul>
                 </li>
-
               </ul>
               <div class="my-3 mx-4 h-px bg-slate-200 dark:bg-navy-500"></div>
             </div>
@@ -510,46 +506,48 @@
                         </button>
                       </div>
 
-                      <div class="is-scrollbar-hidden overflow-y-auto overscroll-contain pb-2">
-                          <div
-                            class="mt-3 flex items-center justify-between bg-slate-100 py-1.5 px-3 dark:bg-navy-800"
+                      <div
+                        class="is-scrollbar-hidden overflow-y-auto overscroll-contain pb-2"
+                      >
+                        <div
+                          class="mt-3 flex items-center justify-between bg-slate-100 py-1.5 px-3 dark:bg-navy-800"
+                        >
+                          <p
+                            class="text-xs uppercase text-slate-400 dark:text-navy-300"
                           >
-                            <p
-                              class="text-xs uppercase text-slate-400 dark:text-navy-300"
-                            >
-                              Recent
-                            </p>
-                            <a
-                              href="#"
-                              class="text-tiny+ font-medium uppercase text-primary outline-none transition-colors duration-300 hover:text-primary/70 focus:text-primary/70 dark:text-accent-light dark:hover:text-accent-light/70 dark:focus:text-accent-light/70"
-                            >
-                              View All
-                            </a>
-                          </div>
+                            Recent
+                          </p>
+                          <a
+                            href="#"
+                            class="text-tiny+ font-medium uppercase text-primary outline-none transition-colors duration-300 hover:text-primary/70 focus:text-primary/70 dark:text-accent-light dark:hover:text-accent-light/70 dark:focus:text-accent-light/70"
+                          >
+                            View All
+                          </a>
+                        </div>
 
-                          <div class="mt-1 font-inter font-medium">
-                            <a
-                              class="group flex items-center space-x-2 px-2.5 py-2 tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100"
-                              href="dashboard-user.html"
+                        <div class="mt-1 font-inter font-medium">
+                          <a
+                            class="group flex items-center space-x-2 px-2.5 py-2 tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100"
+                            href="dashboard-user.html"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="h-4.5 w-4.5 text-slate-400 transition-colors group-hover:text-slate-500 group-focus:text-slate-500 dark:text-navy-300 dark:group-hover:text-navy-200 dark:group-focus:text-navy-200"
+                              fill="none"
+                              viewbox="0 0 24 24"
+                              stroke="currentColor"
+                              stroke-width="1.5"
                             >
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="h-4.5 w-4.5 text-slate-400 transition-colors group-hover:text-slate-500 group-focus:text-slate-500 dark:text-navy-300 dark:group-hover:text-navy-200 dark:group-focus:text-navy-200"
-                                fill="none"
-                                viewbox="0 0 24 24"
-                                stroke="currentColor"
-                                stroke-width="1.5"
-                              >
-                                <path
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"
-                                />
-                              </svg>
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"
+                              />
+                            </svg>
 
-                              <span>My Dashboard</span>
-                            </a>
-                          </div>
+                            <span>My Dashboard</span>
+                          </a>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -602,10 +600,24 @@
               </button>
 
               <!-- Notification-->
-              <div x-effect="if($store.global.isSearchbarActive) isShowPopper = false" x-data="usePopper({placement:'bottom-end',offset:12})" @click.outside="if(isShowPopper) isShowPopper = false"class="flex">
-
-                <button @click="isShowPopper = !isShowPopper" x-ref="popperRef" class="btn relative h-8 w-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-500 dark:text-navy-100" stroke="currentColor" fill="none" viewbox="0 0 24 24">
+              <div
+                x-effect="if($store.global.isSearchbarActive) isShowPopper = false"
+                x-data="usePopper({placement:'bottom-end',offset:12})"
+                @click.outside="if(isShowPopper) isShowPopper = false"
+                class="flex"
+              >
+                <button
+                  @click="isShowPopper = !isShowPopper"
+                  x-ref="popperRef"
+                  class="btn relative h-8 w-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 text-slate-500 dark:text-navy-100"
+                    stroke="currentColor"
+                    fill="none"
+                    viewbox="0 0 24 24"
+                  >
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -613,10 +625,16 @@
                       d="M15.375 17.556h-6.75m6.75 0H21l-1.58-1.562a2.254 2.254 0 01-.67-1.596v-3.51a6.612 6.612 0 00-1.238-3.85 6.744 6.744 0 00-3.262-2.437v-.379c0-.59-.237-1.154-.659-1.571A2.265 2.265 0 0012 2c-.597 0-1.169.234-1.591.65a2.208 2.208 0 00-.659 1.572v.38c-2.621.915-4.5 3.385-4.5 6.287v3.51c0 .598-.24 1.172-.67 1.595L3 17.556h12.375zm0 0v1.11c0 .885-.356 1.733-.989 2.358A3.397 3.397 0 0112 22a3.397 3.397 0 01-2.386-.976 3.313 3.313 0 01-.989-2.357v-1.111h6.75z"
                     />
                   </svg>
-                  <span class="absolute -top-px -right-px flex h-3 w-3 items-center justify-center">
-                      <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-secondary opacity-80"></span>
-                      <span class="inline-flex h-2 w-2 rounded-full bg-secondary"></span>
-                    </span>
+                  <span
+                    class="absolute -top-px -right-px flex h-3 w-3 items-center justify-center"
+                  >
+                    <span
+                      class="absolute inline-flex h-full w-full animate-ping rounded-full bg-secondary opacity-80"
+                    ></span>
+                    <span
+                      class="inline-flex h-2 w-2 rounded-full bg-secondary"
+                    ></span>
+                  </span>
                 </button>
 
                 <div
@@ -783,7 +801,6 @@
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
@@ -2849,15 +2866,21 @@
           class="mt-4 grid grid-cols-12 gap-4 sm:mt-5 sm:gap-5 lg:mt-6 lg:gap-6"
         >
           <!--Welcome User  -->
-          <div class="col-span-12 grid grid-cols-12 rounded-lg py-5 sm:py-6 bg-welcome">
+          <div
+            class="col-span-12 grid grid-cols-12 rounded-lg py-5 sm:py-6 bg-welcome"
+          >
             <div class="col-span-12 sm:col-span-6 lg:col-span-4">
               <div class="px-4 text-white sm:px-5">
                 <div class="-mt-1 flex items-center space-x-2">
-                  <h2 class="text-base font-medium tracking-wide">Welcome User</h2>
+                  <h2 class="text-base font-medium tracking-wide">
+                    Welcome <span id="fullname"></span>
+                  </h2>
                 </div>
 
                 <div class="mt-3">
-                  <p class="text-2xl font-semibold">$<span class="accountBalance"></span></p>
+                  <p class="text-2xl font-semibold">
+                    $<span class="accountBalance"></span>
+                  </p>
                   <!-- <p class="text-xs">+ 3.5%</p> -->
                 </div>
 
@@ -2915,56 +2938,78 @@
             </div>
 
             <div class="col-span-12 mt-5 sm:col-span-12 sm:mt-0 lg:col-span-6">
-                <div class="swiper px-5 sm:pl-0" x-init="$nextTick(()=>new Swiper($el,{  slidesPerView: 'auto', spaceBetween: 16}))">
-                    <div class="swiper-wrapper flex justify-end">
-                        <div class="swiper-slide relative h-40 w-64 shrink-0 rounded-lg bg-gradient-to-br from-[#ffffff55] to-[#ffffff20]">
-                          <div class="absolute inset-0 flex flex-col justify-between rounded-lg border border-white/10 p-5">
-                            <div class="flex items-center justify-between">
-                              <img
-                                class="h-3"
-                                src="images/payments/cc-visa-white.svg"
-                                alt="image"
-                              />
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="h-5 w-5 text-indigo-100"
-                                fill="none"
-                                stroke="currentColor"
-                                viewbox="0 0 24 24"
-                              >
-                                <path
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="1.5"
-                                  d="M5.343 7.257a.5.5 0 01.354.147 6.5 6.5 0 010 9.192.64.64 0 00-.073.087 4.718 4.718 0 01-.56-.094 1.301 1.301 0 01-.109-.03.5.5 0 01.035-.67 5.5 5.5 0 000-7.778.5.5 0 01.353-.854zm-.422 9.288a.06.06 0 010 0zM15 1.6a.5.5 0 01.354.147 14.5 14.5 0 010 20.506.5.5 0 11-.708-.707 13.5 13.5 0 000-19.092A.5.5 0 0115 1.6zM10.172 4.43a.5.5 0 01.353.146 10.5 10.5 0 010 14.85.5.5 0 11-.707-.707 9.5 9.5 0 000-13.436.5.5 0 01.354-.853z"
-                                />
-                              </svg>
-                            </div>
-                            <div class="text-white">
-                              <p class="text-lg font-semibold tracking-wide">
-                                $<span class="accountBalance"></span>
-                              </p>
-                              <p class="mt-1 text-xs font-medium">
-                                **** **** **** 7946
-                              </p>
-                            </div>
-                          </div>
-                        </div>
+              <div
+                class="swiper px-5 sm:pl-0"
+                x-init="$nextTick(()=>new Swiper($el,{  slidesPerView: 'auto', spaceBetween: 16}))"
+              >
+                <div class="swiper-wrapper flex justify-end">
+                  <div
+                    class="swiper-slide relative h-40 w-64 shrink-0 rounded-lg bg-gradient-to-br from-[#ffffff55] to-[#ffffff20]"
+                  >
+                    <div
+                      class="absolute inset-0 flex flex-col justify-between rounded-lg border border-white/10 p-5"
+                    >
+                      <div class="flex items-center justify-between">
+                        <img
+                          class="h-3"
+                          src="images/payments/cc-visa-white.svg"
+                          alt="image"
+                        />
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-5 w-5 text-indigo-100"
+                          fill="none"
+                          stroke="currentColor"
+                          viewbox="0 0 24 24"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="1.5"
+                            d="M5.343 7.257a.5.5 0 01.354.147 6.5 6.5 0 010 9.192.64.64 0 00-.073.087 4.718 4.718 0 01-.56-.094 1.301 1.301 0 01-.109-.03.5.5 0 01.035-.67 5.5 5.5 0 000-7.778.5.5 0 01.353-.854zm-.422 9.288a.06.06 0 010 0zM15 1.6a.5.5 0 01.354.147 14.5 14.5 0 010 20.506.5.5 0 11-.708-.707 13.5 13.5 0 000-19.092A.5.5 0 0115 1.6zM10.172 4.43a.5.5 0 01.353.146 10.5 10.5 0 010 14.85.5.5 0 11-.707-.707 9.5 9.5 0 000-13.436.5.5 0 01.354-.853z"
+                          />
+                        </svg>
+                      </div>
+                      <div class="text-white">
+                        <p class="text-lg font-semibold tracking-wide">
+                          $<span class="accountBalance"></span>
+                        </p>
+                        <p class="mt-1 text-xs font-medium">
+                          Your account Number:
+                          <span id="displayAccountNumber"></span>
+                        </p>
+                      </div>
                     </div>
+                  </div>
                 </div>
+              </div>
             </div>
           </div>
 
           <!-- Transaction History -->
-          <div class="card group col-span-12 pb-5 lg:col-span-8">
-            <div class="my-3 flex flex-col justify-between px-4 sm:flex-row sm:items-center sm:px-5">
-              <div class="flex flex-1 items-center justify-between space-x-2 sm:flex-initial">
-                <h2 class="text-sm+ font-medium tracking-wide text-slate-700 dark:text-navy-100"> History </h2>
-                <div x-data="usePopper({placement:'bottom-start',offset:4})" @click.outside="if(isShowPopper isShowPopper = false" :class="!isShowPopper && 'sm:opacity-0'"class="inline-flex focus-within:opacity-100 group-hover:opacity-100">
+          <div class="card group col-span-12 pb-5 lg:col-span-4">
+            <div
+              class="my-3 flex flex-col justify-between px-4 sm:flex-row sm:items-center sm:px-5"
+            >
+              <div
+                class="flex flex-1 items-center justify-between space-x-2 sm:flex-initial"
+              >
+                <h2
+                  class="text-sm+ font-medium tracking-wide text-slate-700 dark:text-navy-100"
+                >
+                  History
+                </h2>
+                <div
+                  x-data="usePopper({placement:'bottom-start',offset:4})"
+                  @click.outside="if(isShowPopper isShowPopper = false"
+                  :class="!isShowPopper && 'sm:opacity-0'"
+                  class="inline-flex focus-within:opacity-100 group-hover:opacity-100"
+                >
                   <button
                     x-ref="popperRef"
                     @click="isShowPopper = !isShowPopper"
-                    class="btn h-8 w-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                    class="btn h-8 w-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       class="h-5 w-5"
@@ -3040,20 +3085,9 @@
               </div>
             </div>
 
-            <div
-              class="grid grid-cols-12 gap-4 px-4 sm:gap-5 sm:px-5 lg:gap-6 lg:px-5"
-            >
+            <div class="px-4 sm:gap-5 sm:px-5 lg:gap-6 lg:px-5">
               <div
-                class="col-span-12 sm:order-last sm:col-span-6 sm:mt-2 xl:col-span-7"
-              >
-                <div class="ax-transparent-gridline">
-                  <div
-                    x-init="$nextTick(() => { $el._x_chart = new ApexCharts($el,pages.charts.historyTransactionsLine); $el._x_chart.render() });"
-                  ></div>
-                </div>
-              </div>
-              <div
-                class="col-span-12 rounded-lg bg-slate-50 p-3 dark:bg-navy-600 sm:col-span-6 xl:col-span-5"
+                class="rounded-lg bg-slate-50 p-3 dark:bg-navy-600 sm:col-span-6 xl:col-span-5"
               >
                 <div class="space-y-4">
                   <div class="flex cursor-pointer items-center justify-between">
@@ -3204,6 +3238,103 @@
               </div>
             </div>
           </div>
+          <!-- Request Money -->
+          <div class="card col-span-12 px-4 pb-5 sm:px-5 lg:col-span-4">
+            <div class="flex items-center justify-between py-3">
+              <h2
+                class="font-medium tracking-wide text-slate-700 dark:text-navy-100"
+              >
+                Request/Withdraw Money
+              </h2>
+            </div>
+
+            <div class="h-full flex flex-col justify-center">
+              <div class="mt-2 space-y-4">
+                <!-- <label class="block">
+                  <span class="text-xs+">Pay to</span>
+                  <input
+                    x-input-mask="{
+                            creditCard: true
+                        }"
+                    class="form-input mt-1.5 h-9 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                    placeholder="**** **** **** ****"
+                    type="text"
+                  />
+                </label> -->
+                <div>
+                  <span class="text-xs+">Request Money</span>
+
+                  <div class="mt-1.5 flex h-9 -space-x-px">
+                    <input
+                      class="form-input w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:z-10 hover:border-slate-400 focus:z-10 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                      placeholder="Request Amount"
+                      id="moneyRequestAmount"
+                      type="text"
+                    />
+                  </div>
+                </div>
+              </div>
+              <!-- <div
+                class="mt-5 flex justify-between text-slate-400 dark:text-navy-300"
+              >
+                <p class="text-xs+">Bank Fee:</p>
+                <p>$1.56</p>
+              </div>
+              <div class="mt-2 flex justify-between">
+                <p>Total:</p>
+                <p class="font-medium text-slate-700 dark:text-navy-100">$3.56</p>
+              </div> -->
+              <button
+                class="btn mt-5 h-10 w-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90"
+                onclick="moneyRequest()"
+              >
+                Send Request
+              </button>
+
+              <div class="mt-8 space-y-4">
+                <!-- <label class="block">
+                  <span class="text-xs+">Pay to</span>
+                  <input
+                    x-input-mask="{
+                            creditCard: true
+                        }"
+                    class="form-input mt-1.5 h-9 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                    placeholder="**** **** **** ****"
+                    type="text"
+                  />
+                </label> -->
+                <div>
+                  <span class="text-xs+">Withdraw Money</span>
+
+                  <div class="mt-1.5 flex h-9 -space-x-px">
+                    <input
+                      class="form-input w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:z-10 hover:border-slate-400 focus:z-10 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                      placeholder="Withdraw amount"
+                      id="moneyWithdrawalAmount"
+                      type="text"
+                    />
+                  </div>
+                </div>
+              </div>
+              <!-- <div
+                class="mt-5 flex justify-between text-slate-400 dark:text-navy-300"
+              >
+                <p class="text-xs+">Bank Fee:</p>
+                <p>$1.56</p>
+              </div>
+              <div class="mt-2 flex justify-between">
+                <p>Total:</p>
+                <p class="font-medium text-slate-700 dark:text-navy-100">$3.56</p>
+              </div> -->
+              <button
+                class="btn mt-5 h-10 w-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90"
+                onclick="withdrawRequest()"
+              >
+                Withdraw
+              </button>
+            </div>
+          </div>
+
           <!-- Send Money -->
           <div class="card col-span-12 px-4 pb-5 sm:px-5 lg:col-span-4">
             <div class="flex items-center justify-between py-3">
@@ -3283,7 +3414,7 @@
                 </div>
               </div>
             </div>
-            <div class="flex space-x-2">
+            <!-- <div class="flex space-x-2">
               <div class="avatar h-8 w-8 hover:z-10">
                 <img
                   class="rounded-full ring ring-white dark:ring-navy-700"
@@ -3315,8 +3446,8 @@
                   alt="avatar"
                 />
               </div>
-            </div>
-            <div class="mt-2 flex items-center justify-between">
+            </div> -->
+            <!-- <div class="mt-2 flex items-center justify-between">
               <p class="text-xs+">View All Contacts</p>
 
               <button
@@ -3337,16 +3468,14 @@
                   />
                 </svg>
               </button>
-            </div>
+            </div> -->
             <div class="mt-2 space-y-4">
               <label class="block">
-                <span class="text-xs+">Pay to</span>
+                <span class="text-xs+">Transfer to</span>
                 <input
-                  x-input-mask="{
-                          creditCard: true
-                      }"
                   class="form-input mt-1.5 h-9 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                  placeholder="**** **** **** ****"
+                  placeholder="Account Number"
+                  id="accountnumbertotransferto"
                   type="text"
                 />
               </label>
@@ -3354,22 +3483,23 @@
                 <span class="text-xs+">Amount</span>
 
                 <div class="mt-1.5 flex h-9 -space-x-px">
-                  <select
+                  <!-- <select
                     class="form-select rounded-l-lg border border-slate-300 bg-white px-3 py-2 pr-9 hover:z-10 hover:border-slate-400 focus:z-10 focus:border-primary dark:border-navy-450 dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent"
                   >
                     <option>$</option>
                     <option>£</option>
                     <option>€</option>
-                  </select>
+                  </select> -->
                   <input
-                    class="form-input w-full rounded-r-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:z-10 hover:border-slate-400 focus:z-10 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                    placeholder="Price"
+                    class="form-input w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:z-10 hover:border-slate-400 focus:z-10 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                    placeholder="Amount to Transfer"
+                    id="amounttotransfer"
                     type="text"
                   />
                 </div>
               </div>
             </div>
-            <div
+            <!-- <div
               class="mt-5 flex justify-between text-slate-400 dark:text-navy-300"
             >
               <p class="text-xs+">Bank Fee:</p>
@@ -3378,11 +3508,12 @@
             <div class="mt-2 flex justify-between">
               <p>Total:</p>
               <p class="font-medium text-slate-700 dark:text-navy-100">$3.56</p>
-            </div>
+            </div> -->
             <button
-              class="btn mt-5 h-10 w-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90"
+              class="btn mt-10 h-10 w-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90"
+              onclick="transferToOtherUsers()"
             >
-              Send Money
+              Transfer Money
             </button>
           </div>
         </div>
@@ -3395,74 +3526,175 @@
     <div id="x-teleport-target"></div>
 
     <script src="../../js/defaults.js"></script>
+    <script src="../../js/toast.min.js"></script>
     <script>
       window.addEventListener("DOMContentLoaded", () => Alpine.start());
 
       let accountBalance = document.querySelectorAll(".accountBalance");
       let income = document.getElementById("income");
       let expense = document.getElementById("expense");
+      let displayAccountNumber = document.getElementById(
+        "displayAccountNumber"
+      );
+      let moneyRequestAmount = document.getElementById("moneyRequestAmount");
+      let moneyWithdrawalAmount = document.getElementById(
+        "moneyWithdrawalAmount"
+      );
+      let accountnumbertotransferto = document.getElementById(
+        "accountnumbertotransferto"
+      );
+      let amounttotransfer = document.getElementById("amounttotransfer");
+      let fullname = document.getElementById("fullname");
+      let profileImage = document.querySelectorAll(".profileImage");
 
       function getDashboardComponents() {
-
         fetch(baseUrl + "bill/accountbalance", {
           method: "GET",
           headers: {
-            accesstoken: localStorage.getItem("Authorization")
-          }
-        }).then(async (response) => {
-          const data = await response.json();
+            accesstoken: localStorage.getItem("Authorization"),
+          },
+        })
+          .then(async (response) => {
+            const data = await response.json();
 
-          console.log(data);
+            console.log(data);
 
-          console.log(data.userBalance);
-          console.log(localStorage.getItem("auth"));
-          
-          if(response.status == 200) {
-            accountBalance.forEach(bal => {
-              bal.innerHTML = data.userBalance
-            });
-          }
-
-        }).catch(e => {
-          console.log(e);
-        });
+            console.log(data.userBalance);
+            console.log(localStorage.getItem("auth"));
 
 
+
+            if (response.status == 200) {
+
+              fullname.innerText = `${data.firstName}`;
+
+              console.log(profileImage);
+              
+
+              profileImage.forEach(p => {
+                console.log(p);
+                p.src = baseUrl + "uploads/" + data.picture || "images/avatar/avatar-12.jpg"
+              });
+
+
+              accountBalance.forEach((bal) => {
+                bal.innerHTML = data.userBalance;
+                displayAccountNumber.innerHTML = data.accountNumber;
+              });
+            }
+          })
+          .catch((e) => {
+            console.log(e);
+          });
 
         fetch(baseUrl + "bill/history", {
           method: "GET",
           headers: {
-            accesstoken: localStorage.getItem("Authorization")
-          }
-        }).then(async (response) => {
+            accesstoken: localStorage.getItem("Authorization"),
+          },
+        })
+          .then(async (response) => {
+            const data = await response.json();
 
-          const data = await response.json();
+            if (response.status == 200) {
+              console.log(data);
 
-          if(response.status == 200) {
-            console.log(data);
+              if (data.income.length == 0) {
+                income.innerHTML = 0;
+              }
 
-            if(data.income.length == 0) {
-              income.innerHTML = 0;
+              if (data.expenses.length == 0) {
+                expense.innerHTML = 0;
+              }
+
+              if (data.accountHistory.length == 0) {
+                income.innerHTML = 0;
+                expense.innerHTML = 0;
+                return;
+              }
             }
-
-            if(data.expenses.length == 0) {
-              expense.innerHTML = 0;
-            }
-
-            if(data.accountHistory.length == 0) {
-              income.innerHTML = 0;
-              expense.innerHTML = 0;
-              return;
-            }
-          }
-        }).catch(e => {
-          console.log(e);
-        });
-
+          })
+          .catch((e) => {
+            console.log(e);
+          });
       }
 
       getDashboardComponents();
 
+      async function moneyRequest() {
+        try {
+          const res = await fetch(baseUrl + "bill/requestmoney", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              accesstoken: localStorage.getItem("Authorization"),
+            },
+            body: JSON.stringify({
+              moneyRequestAmount: moneyRequestAmount.value,
+            }),
+          });
+          const data = await res.text();
+
+          if (res.status == 200) {
+            iqwerty.toast.toast(
+              "A request has been sent to the admin, kindly exercise patience."
+            );
+          }
+        } catch (error) {
+          iqwerty.toast.toast("An error occurred");
+          console.log(error);
+        }
+      }
+
+      async function withdrawRequest() {
+        const res = await fetch(baseUrl + "bill/requestwithdrawal", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            accesstoken: localStorage.getItem("Authorization"),
+          },
+          body: JSON.stringify({
+            moneyWithdrawalAmount: moneyWithdrawalAmount.value,
+          }),
+        });
+
+        if(res.status == 200) {
+          const data = await res.text();
+          console.log(data);
+          iqwerty.toast.toast("Your request is under review");
+        }
+        
+      }
+
+      async function transferToOtherUsers() {
+        try {
+          const res = await fetch(baseUrl + "bill/transferbetweenusers", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              accesstoken: localStorage.getItem("Authorization"),
+            },
+            body: JSON.stringify({
+              accountnumbertotransferto: accountnumbertotransferto.value,
+              amounttotransfer: amounttotransfer.value,
+            }),
+          });
+
+          if (res.status == 200) {
+            const data = await res.json();
+            iqwerty.toast.toast("Transfer Successful");
+            accountBalance.forEach((b) => {
+              b.innerHTML = data.newAccountBalance;
+            });
+          } else {
+            const d = await res.text();
+            iqwerty.toast.toast(d);
+          }
+        } catch (error) {
+          iqwerty.toast.toast("An error occurred.");
+          console.log(error);
+        }
+      }
     </script>
   </body>
 </html>

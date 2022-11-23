@@ -3271,104 +3271,10 @@
 
 
 
-        <!-- <div class="col-span-12 lg\:col-span-12 mt-10">
-          <div class="card col-span-12 px-4 pb-5 sm:px-5">
-            <div class="my-3 flex h-8 items-center justify-between">
-              <h2
-                class="font-medium tracking-wide text-slate-700 dark:text-navy-100"
-              >
-                Customers
-              </h2>
-              <a
-                href="#"
-                class="border-b border-dotted border-current pb-0.5 text-xs+ font-medium text-primary outline-none transition-colors duration-300 hover:text-primary/70 focus:text-primary/70 dark:text-accent-light dark:hover:text-accent-light/70 dark:focus:text-accent-light/70"
-              >
-                View All
-              </a>
-            </div>
-            <div class="space-y-4">
-              <div class="flex cursor-pointer items-center justify-between">
-                <div class="flex items-center space-x-3">
-                  <div class="avatar">
-                    <img
-                      class="rounded-full"
-                      src="images/avatar/avatar-20.jpg"
-                      alt="avatar"
-                    />
-                  </div>
-                  <div>
-                    <p class="text-slate-700 dark:text-navy-100">
-                      Peter Obi
-                    </p>
-                    <p
-                      class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
-                    >
-                      March 21, 2022 - 08:05
-                    </p>
-                  </div>
-                </div>
-                <p class="font-medium text-success">
-                  <span class="mr-1">Enable User</span>
-                  <span class="text-warning">Disable User</span>
-                </p>
-              </div>
-              <div class="flex cursor-pointer items-center justify-between">
-                <div class="flex items-center space-x-3">
-                  <div class="avatar">
-                    <img
-                      class="rounded-full"
-                      src="images/avatar/avatar-19.jpg"
-                      alt="avatar"
-                    />
-                  </div>
-                  <div>
-                    <p class="text-slate-700 dark:text-navy-100">
-                      Henry Justice
-                    </p>
-                    <p
-                      class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
-                    >
-                      April 12, 2022 - 11:55
-                    </p>
-                  </div>
-                </div>
-                <p class="font-medium text-success">
-                  <span class="mr-1">Enable User</span>
-                  <span class="text-warning">Disable User</span>
-                </p>
-              </div>
-              <div class="flex cursor-pointer items-center justify-between">
-                <div class="flex items-center space-x-3">
-                  <div class="avatar">
-                    <img
-                      class="rounded-full"
-                      src="images/avatar/avatar-18.jpg"
-                      alt="avatar"
-                    />
-                  </div>
-                  <div>
-                    <p class="text-slate-700 dark:text-navy-100">
-                      Dennis Simeon
-                    </p>
-                    <p
-                      class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
-                    >
-                      May 16, 2022 - 14:45
-                    </p>
-                  </div>
-                </div>
-                <p class="font-medium text-success">
-                  <span class="mr-1">Enable User</span>
-                  <span class="text-warning">Disable User</span>
-                </p>
-              </div>
-            </div>
+        <div class="col-span-12 lg\:col-span-12 mt-10">
+          <div class="card col-span-12 px-4 pb-5 sm:px-5" id="showTransactionRequests"></div>
           </div>
-        </div> -->
-
-
-
-
+        </div>
       </main>
     </div>
     <!-- 
@@ -3377,6 +3283,7 @@
       -->
     <div id="x-teleport-target"></div>
     <script src="../../js/defaults.js"></script>
+    <script src="../../js/toast.min.js"></script>
     <script>
       window.addEventListener("DOMContentLoaded", () => Alpine.start());
 
@@ -3387,6 +3294,7 @@
       let totalUsers = document.getElementById("totalUsers");
       let totalAmountUpdate = document.getElementById("totalAmountUpdate");
       let transactionsSection = document.getElementById("transactionsSection");
+      let showTransactionRequests = document.getElementById("showTransactionRequests");
 
       async function getDashboardComp() {
         const res = await fetch(baseUrl + "users/adminprofile", {
@@ -3417,6 +3325,75 @@
       }
 
       getDashboardComp();
+
+      async function getWithdrawalRequests() {
+        const withdrawalRequests = await fetch(baseUrl + "bill/transactionlist/nothistory", {
+          method: "GET",
+          headers: {
+            accesstoken: localStorage.getItem("Authorization")
+          }
+        });
+
+        const data = await withdrawalRequests.json();
+
+        console.log("Here");
+        console.log(data);
+
+        if(withdrawalRequests.status == 200) {
+          showTransactionRequests.innerHTML = "";
+          if (data.length == 0) {
+            showTransactionRequests.innerHTML = "<div class='text-center pt-4'>No withdrawal request</div>";
+          }
+          data.forEach(d => {
+            showTransactionRequests.innerHTML += `
+            <div class="flex cursor-pointer my-2 items-center justify-between">
+                <div class="flex items-center space-x-3">
+                  <div>
+                    <p class="text-slate-700 dark:text-navy-100">
+                      ${d.from.firstName} ${d.from.lastName} has made a request of $${d.amount}
+                    </p>
+                    <p
+                      class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
+                    >
+                      ${d.createdAt}
+                    </p>
+                  </div>
+                </div>
+                <p class="font-medium text-success">
+                  <button class="mr-1" onclick="approveDecision('${d._id}', '${d.from.accountNumber}', 'approve')">Approve</button>
+                  <button class="text-warning" onclick="approveDecision('${d._id}', '${d.from.accountNumber}', 'decline')">Decline</button>
+                </p>
+              </div>
+            `;
+          });
+        }
+
+      }
+
+      getWithdrawalRequests();
+
+
+      async function approveDecision(id, accountNumber, decision) {
+        console.log(id, accountNumber, decision);
+
+        let transactions = await fetch(baseUrl + "bill/decide", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            accesstoken: localStorage.getItem("Authorization")
+          },
+          body: JSON.stringify({
+            id, accountNumber, decision
+          })
+        });
+
+        if(transactions.status == 200) {
+          const data = await transactions.text(); 
+          console.log("Backend data", data);
+          iqwerty.toast.toast("Successful");
+          location.reload();
+        }
+      }
 
 
       function showTransactions(t) {
