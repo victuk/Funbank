@@ -3085,149 +3085,14 @@
               </div>
             </div>
 
-            <div class="px-4 sm:gap-5 sm:px-5 lg:gap-6 lg:px-5" style="height: 350px; overflow-y: auto;">
+            <div
+              class="px-4 sm:gap-5 sm:px-5 lg:gap-6 lg:px-5"
+              style="height: 350px; overflow-y: auto"
+            >
               <div
                 class="rounded-lg bg-slate-50 p-3 dark:bg-navy-600 sm:col-span-6 xl:col-span-5"
               >
-                <div class="space-y-4" id="userHistory">
-                  <div class="flex cursor-pointer items-center justify-between">
-                    <div class="flex items-center space-x-3">
-                      <div class="avatar">
-                        <img
-                          class="rounded-full"
-                          src="images/avatar/avatar-20.jpg"
-                          alt="avatar"
-                        />
-                      </div>
-                      <div>
-                        <p
-                          class="text-slate-700 line-clamp-1 dark:text-navy-100"
-                        >
-                          Konnor Guzman
-                        </p>
-                        <p
-                          class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
-                        >
-                          Dec 21, 2021 - 08:05
-                        </p>
-                      </div>
-                    </div>
-                    <p class="font-medium text-success">$660.22</p>
-                  </div>
-                  <div class="flex cursor-pointer items-center justify-between">
-                    <div class="flex items-center space-x-3">
-                      <div class="avatar">
-                        <img
-                          class="rounded-full"
-                          src="images/avatar/avatar-19.jpg"
-                          alt="avatar"
-                        />
-                      </div>
-                      <div>
-                        <p
-                          class="text-slate-700 line-clamp-1 dark:text-navy-100"
-                        >
-                          Henry Curtis
-                        </p>
-                        <p
-                          class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
-                        >
-                          Dec 19, 2021 - 11:55
-                        </p>
-                      </div>
-                    </div>
-                    <p class="font-medium text-success">$33.63</p>
-                  </div>
-                  <div class="flex cursor-pointer items-center justify-between">
-                    <div class="flex items-center space-x-3">
-                      <div class="avatar">
-                        <img
-                          class="rounded-full"
-                          src="images/avatar/avatar-18.jpg"
-                          alt="avatar"
-                        />
-                      </div>
-                      <div>
-                        <p
-                          class="text-slate-700 line-clamp-1 dark:text-navy-100"
-                        >
-                          Derrick Simmons
-                        </p>
-                        <p
-                          class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
-                        >
-                          Dec 16, 2021 - 14:45
-                        </p>
-                      </div>
-                    </div>
-                    <p class="font-medium text-success">$674.63</p>
-                  </div>
-                  <div class="flex cursor-pointer items-center justify-between">
-                    <div class="flex items-center space-x-3">
-                      <div>
-                        <p
-                          class="text-slate-700 line-clamp-1 dark:text-navy-100"
-                        >
-                          Kartina West
-                        </p>
-                        <p
-                          class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
-                        >
-                          Dec 13, 2021 - 11:30
-                        </p>
-                      </div>
-                    </div>
-                    <p class="font-medium text-error">$547.63</p>
-                  </div>
-                  <div class="flex cursor-pointer items-center justify-between">
-                    <div class="flex items-center space-x-3">
-                      <div class="avatar">
-                        <img
-                          class="rounded-full"
-                          src="images/avatar/avatar-7.jpg"
-                          alt="avatar"
-                        />
-                      </div>
-                      <div>
-                        <p
-                          class="text-slate-700 line-clamp-1 dark:text-navy-100"
-                        >
-                          Samantha Shelton
-                        </p>
-                        <p
-                          class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
-                        >
-                          Dec 10, 2021 - 09:41
-                        </p>
-                      </div>
-                    </div>
-                    <p class="font-medium text-success">$736.24</p>
-                  </div>
-                  <div class="flex cursor-pointer items-center justify-between">
-                    <div class="flex items-center space-x-3">
-                      <div class="avatar">
-                        <img
-                          class="rounded-full"
-                          src="images/avatar/avatar-5.jpg"
-                          alt="avatar"
-                        />
-                      </div>
-                      <div>
-                        <p
-                          class="text-slate-700 line-clamp-1 dark:text-navy-100"
-                        >
-                          Joe Perkins
-                        </p>
-                        <p
-                          class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
-                        >
-                          Dec 06, 2021 - 11:41
-                        </p>
-                      </div>
-                    </div>
-                    <p class="font-medium text-success">$558.88</p>
-                  </div>
-                </div>
+                <div class="space-y-4" id="userHistory"></div>
               </div>
             </div>
           </div>
@@ -3701,144 +3566,152 @@
         if (h.status == 200) {
           userHistory.innerHTML = "";
 
+          if (data.userTransactionHistory.length == 0) {
+            userHistory.innerHTML = `<div>No Recent Transaction</div>`;
+          } else {
+            data.userTransactionHistory.forEach((d) => {
+              if (d.tType == "deposit") {
+                // Cash fund request
 
-
-          data.userTransactionHistory.forEach((d) => {
-
-            if(d.tType == "deposit") {
-              // Cash fund request
-
-              userHistory.innerHTML += `
-              <div class="flex cursor-pointer items-center justify-between">
-                    <div class="flex items-center space-x-3">
-                      <div>
-                        <p
-                          class="text-slate-700 line-clamp-1 dark:text-navy-100"
-                        >
-                          Cash Request
-                        </p>
-                        <p
-                          class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
-                        >
-                          ${d.createdAt}
-                        </p>
-                      </div>
-                    </div>
-                    <p class="font-medium text-success">$${d.amount}</p>
-                  </div>
-              `;
-
-              
-
-            } if(d.tType == "withdraw") {
-              // Withdrawal fund request
-
-              userHistory.innerHTML += `
-              <div class="flex cursor-pointer items-center justify-between">
-                    <div class="flex items-center space-x-3">
-                      <div>
-                        <p
-                          class="text-slate-700 line-clamp-1 dark:text-navy-100"
-                        >
-                          Withdraw Request (${d.approved == true && d.rejected == false ? "Approved" : ""} ${d.approved == false && d.rejected == false ? "Pending" : ""} ${d.approved == false && d.rejected == true ? "Declined" : ""})
-                        </p>
-                        <p
-                          class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
-                        >
-                          ${d.createdAt}
-                        </p>
-                      </div>
-                    </div>
-                    ${d.approved == false && d.rejected == true ? `<p class="font-medium text-error">$${d.amount}</p>` : `<p class="font-medium text-success">$${d.amount}</p>`}
-                  </div>
-              `;
-
-            } if(d.tType == "transfer") {
-              // Transaction Histories
-
-              if(d.from == data.userid) {
                 userHistory.innerHTML += `
-              <div class="flex cursor-pointer items-center justify-between">
-                    <div class="flex items-center space-x-3">
-                      <div>
-                        <p
-                          class="text-slate-700 line-clamp-1 dark:text-navy-100"
-                        >
-                          Transfer Sent
-                        </p>
-                        <p
-                          class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
-                        >
-                          ${d.createdAt}
-                        </p>
-                      </div>
-                    </div>
-                    <p class="font-medium text-success">$${d.amount}</p>
-                  </div>
-              `;
-              } else if(d.to == data.userid) {
-                userHistory.innerHTML += `
-              <div class="flex cursor-pointer items-center justify-between">
-                    <div class="flex items-center space-x-3">
-                      <div>
-                        <p
-                          class="text-slate-700 line-clamp-1 dark:text-navy-100"
-                        >
-                          Transfer Received
-                        </p>
-                        <p
-                          class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
-                        >
-                          ${d.createdAt}
-                        </p>
-                      </div>
-                    </div>
-                    <p class="font-medium text-success">$${d.amount}</p>
-                  </div>
-              `;
+  <div class="flex cursor-pointer items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <div>
+            <p
+              class="text-slate-700 line-clamp-1 dark:text-navy-100"
+            >
+              Cash Request
+            </p>
+            <p
+              class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
+            >
+              ${d.createdAt}
+            </p>
+          </div>
+        </div>
+        <p class="font-medium text-success">$${d.amount}</p>
+      </div>
+  `;
               }
-            }
+              if (d.tType == "withdraw") {
+                // Withdrawal fund request
 
-          //   userHistory.innerHTML += `
+                userHistory.innerHTML += `
+  <div class="flex cursor-pointer items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <div>
+            <p
+              class="text-slate-700 line-clamp-1 dark:text-navy-100"
+            >
+              Withdraw Request (${
+                d.approved == true && d.rejected == false ? "Approved" : ""
+              } ${
+                  d.approved == false && d.rejected == false ? "Pending" : ""
+                } ${
+                  d.approved == false && d.rejected == true ? "Declined" : ""
+                })
+            </p>
+            <p
+              class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
+            >
+              ${d.createdAt}
+            </p>
+          </div>
+        </div>
+        ${
+          d.approved == false && d.rejected == true
+            ? `<p class="font-medium text-error">$${d.amount}</p>`
+            : `<p class="font-medium text-success">$${d.amount}</p>`
+        }
+      </div>
+  `;
+              }
+              if (d.tType == "transfer") {
+                // Transaction Histories
 
-          // <div class="flex cursor-pointer items-center justify-between">
-          //           <div class="flex items-center space-x-3">
-          //             <div>
-          //               <p
-          //                 class="text-slate-700 line-clamp-1 dark:text-navy-100"
-          //               >
-          //                 Derrick Simmons
-          //               </p>
-          //               <p
-          //                 class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
-          //               >
-          //                 Dec 16, 2021 - 14:45
-          //               </p>
-          //             </div>
-          //           </div>
-          //           <p class="font-medium text-success">$674.63</p>
-          //         </div>
+                if (d.from == data.userid) {
+                  userHistory.innerHTML += `
+  <div class="flex cursor-pointer items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <div>
+            <p
+              class="text-slate-700 line-clamp-1 dark:text-navy-100"
+            >
+              Transfer Sent
+            </p>
+            <p
+              class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
+            >
+              ${d.createdAt}
+            </p>
+          </div>
+        </div>
+        <p class="font-medium text-success">$${d.amount}</p>
+      </div>
+  `;
+                } else if (d.to == data.userid) {
+                  userHistory.innerHTML += `
+  <div class="flex cursor-pointer items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <div>
+            <p
+              class="text-slate-700 line-clamp-1 dark:text-navy-100"
+            >
+              Transfer Received
+            </p>
+            <p
+              class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
+            >
+              ${d.createdAt}
+            </p>
+          </div>
+        </div>
+        <p class="font-medium text-success">$${d.amount}</p>
+      </div>
+  `;
+                }
+              }
 
+              //   userHistory.innerHTML += `
 
-          // <div class="flex cursor-pointer items-center justify-between">
-          //           <div class="flex items-center space-x-3">
-          //             <div>
-          //               <p
-          //                 class="text-slate-700 line-clamp-1 dark:text-navy-100"
-          //               >
-          //                 Kartina West
-          //               </p>
-          //               <p
-          //                 class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
-          //               >
-          //                 Dec 13, 2021 - 11:30
-          //               </p>
-          //             </div>
-          //           </div>
-          //           <p class="font-medium text-error">$547.63</p>
-          //         </div>
-          // `;
-          });
+              // <div class="flex cursor-pointer items-center justify-between">
+              //           <div class="flex items-center space-x-3">
+              //             <div>
+              //               <p
+              //                 class="text-slate-700 line-clamp-1 dark:text-navy-100"
+              //               >
+              //                 Derrick Simmons
+              //               </p>
+              //               <p
+              //                 class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
+              //               >
+              //                 Dec 16, 2021 - 14:45
+              //               </p>
+              //             </div>
+              //           </div>
+              //           <p class="font-medium text-success">$674.63</p>
+              //         </div>
+
+              // <div class="flex cursor-pointer items-center justify-between">
+              //           <div class="flex items-center space-x-3">
+              //             <div>
+              //               <p
+              //                 class="text-slate-700 line-clamp-1 dark:text-navy-100"
+              //               >
+              //                 Kartina West
+              //               </p>
+              //               <p
+              //                 class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
+              //               >
+              //                 Dec 13, 2021 - 11:30
+              //               </p>
+              //             </div>
+              //           </div>
+              //           <p class="font-medium text-error">$547.63</p>
+              //         </div>
+              // `;
+            });
+          }
         }
       }
 
