@@ -3408,6 +3408,10 @@
 
         console.log(t);
 
+        if (t.length == 0) {
+          transactionsSection.innerHTML = `No recent transaction.`;
+        }
+
         for(i = 0; i <t.length; i++) {
           transactionsSection.innerHTML +=`
         <div class="flex cursor-pointer items-center justify-between">
