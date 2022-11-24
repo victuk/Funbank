@@ -2864,7 +2864,7 @@
                   </div>
                   <div class="text-white">
                     <p class="text-lg font-semibold tracking-wide" id="balance">$0</p>
-                    <p class="mt-1 text-xs font-medium">**** **** **** 8945</p>
+                    <p class="mt-1 text-xs font-medium" id="accountNumber"></p>
                   </div>
                   <div
                     class="absolute top-0 right-0 -m-3 h-24 w-24 rounded-full bg-white/20"
@@ -3295,6 +3295,7 @@
       let totalAmountUpdate = document.getElementById("totalAmountUpdate");
       let transactionsSection = document.getElementById("transactionsSection");
       let showTransactionRequests = document.getElementById("showTransactionRequests");
+      let accountNumber = document.getElementById("accountNumber");
 
       async function getDashboardComp() {
         const res = await fetch(baseUrl + "users/adminprofile", {
@@ -3306,9 +3307,11 @@
 
         const details = await res.json();
 
+
         console.log(details);
         bal.innerText = details.adminBalance;
         baltwo.innerText = details.adminBalance;
+        accountNumber.innerText = "Admin account number: " + details.accountNumber;
 
         const userCount = await fetch(baseUrl + "users/userscount", {
           method: "GET",
