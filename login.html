@@ -452,10 +452,9 @@
             } else if(data.role == "admin") {
               location.assign("/dashboard/admin/index.html");
             }
+          } else {
+            iqwerty.toast.toast(data.message);
           }
-
-
-
 
         }).catch(e => {
           console.log(e);

@@ -3088,7 +3088,7 @@
 
             <div
               class="px-4 sm:gap-5 sm:px-5 lg:gap-6 lg:px-5"
-              style="height: 350px; overflow-y: auto"
+              style="height: 180px; overflow-y: auto"
             >
               <div
                 class="rounded-lg bg-slate-50 p-3 dark:bg-navy-600 sm:col-span-6 xl:col-span-5"
@@ -3103,13 +3103,13 @@
               <h2
                 class="font-medium tracking-wide text-slate-700 dark:text-navy-100"
               >
-                Request/Withdraw Money
+                Withdraw Money
               </h2>
             </div>
 
             <div class="h-full flex flex-col justify-center">
-              <div class="mt-2 space-y-4">
-                <!-- <label class="block">
+              <!-- <div class="mt-2 space-y-4">
+                <label class="block">
                   <span class="text-xs+">Pay to</span>
                   <input
                     x-input-mask="{
@@ -3119,7 +3119,8 @@
                     placeholder="**** **** **** ****"
                     type="text"
                   />
-                </label> -->
+                </label>
+                
                 <div>
                   <span class="text-xs+">Request Money</span>
 
@@ -3132,7 +3133,8 @@
                     />
                   </div>
                 </div>
-              </div>
+              </div> -->
+
               <!-- <div
                 class="mt-5 flex justify-between text-slate-400 dark:text-navy-300"
               >
@@ -3143,12 +3145,13 @@
                 <p>Total:</p>
                 <p class="font-medium text-slate-700 dark:text-navy-100">$3.56</p>
               </div> -->
-              <button
+
+              <!-- <button
                 class="btn mt-5 h-10 w-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90"
                 onclick="moneyRequest()"
               >
                 Send Request
-              </button>
+              </button> -->
 
               <div class="mt-8 space-y-4">
                 <!-- <label class="block">
@@ -3389,6 +3392,8 @@
     <script>
       window.addEventListener("DOMContentLoaded", () => Alpine.start());
 
+      checkIfLoggedIn();
+
       let accountBalance = document.querySelectorAll(".accountBalance");
       let income = document.getElementById("income");
       let expense = document.getElementById("expense");
@@ -3503,24 +3508,7 @@
         }
       }
 
-      async function withdrawRequest() {
-        const res = await fetch(baseUrl + "bill/requestwithdrawal", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            accesstoken: localStorage.getItem("Authorization"),
-          },
-          body: JSON.stringify({
-            moneyWithdrawalAmount: moneyWithdrawalAmount.value,
-          }),
-        });
-
-        if (res.status == 200) {
-          const data = await res.text();
-          console.log(data);
-          iqwerty.toast.toast("Your request is under review");
-        }
-      }
+      
 
       async function transferToOtherUsers() {
         try {
@@ -3717,6 +3705,28 @@
       }
 
       getHistory();
+
+      async function withdrawRequest() {
+        const res = await fetch(baseUrl + "bill/requestwithdrawal", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            accesstoken: localStorage.getItem("Authorization"),
+          },
+          body: JSON.stringify({
+            moneyWithdrawalAmount: moneyWithdrawalAmount.value,
+          }),
+        });
+
+        if (res.status == 200) {
+          const data = await res.text();
+          console.log(data);
+          iqwerty.toast.toast("Your request is under review");
+          setTimeout(() => {
+            getHistory();
+          }, 2000);
+        }
+      }
 
       function logout() {
         localStorage.removeItem("Authorization");
