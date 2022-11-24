@@ -3390,8 +3390,10 @@
         if(transactions.status == 200) {
           const data = await transactions.text(); 
           console.log("Backend data", data);
-          iqwerty.toast.toast("Successful");
-          location.reload();
+          iqwerty.toast.toast("Successful! Reloading, please wait...");
+          setTimeout(() => {
+            location.reload();
+          }, 1000);
         }
       }
 

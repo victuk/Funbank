@@ -3085,11 +3085,11 @@
               </div>
             </div>
 
-            <div class="px-4 sm:gap-5 sm:px-5 lg:gap-6 lg:px-5">
+            <div class="px-4 sm:gap-5 sm:px-5 lg:gap-6 lg:px-5" style="height: 350px; overflow-y: auto;">
               <div
                 class="rounded-lg bg-slate-50 p-3 dark:bg-navy-600 sm:col-span-6 xl:col-span-5"
               >
-                <div class="space-y-4">
+                <div class="space-y-4" id="userHistory">
                   <div class="flex cursor-pointer items-center justify-between">
                     <div class="flex items-center space-x-3">
                       <div class="avatar">
@@ -3164,13 +3164,6 @@
                   </div>
                   <div class="flex cursor-pointer items-center justify-between">
                     <div class="flex items-center space-x-3">
-                      <div class="avatar">
-                        <img
-                          class="rounded-full"
-                          src="images/avatar/avatar-11.jpg"
-                          alt="avatar"
-                        />
-                      </div>
                       <div>
                         <p
                           class="text-slate-700 line-clamp-1 dark:text-navy-100"
@@ -3546,6 +3539,7 @@
       let amounttotransfer = document.getElementById("amounttotransfer");
       let fullname = document.getElementById("fullname");
       let profileImage = document.querySelectorAll(".profileImage");
+      let userHistory = document.getElementById("userHistory");
 
       function getDashboardComponents() {
         fetch(baseUrl + "bill/accountbalance", {
@@ -3562,20 +3556,17 @@
             console.log(data.userBalance);
             console.log(localStorage.getItem("auth"));
 
-
-
             if (response.status == 200) {
-
               fullname.innerText = `${data.firstName}`;
 
               console.log(profileImage);
-              
 
-              profileImage.forEach(p => {
+              profileImage.forEach((p) => {
                 console.log(p);
-                p.src = baseUrl + "uploads/" + data.picture || "images/avatar/avatar-12.jpg"
+                p.src =
+                  baseUrl + "uploads/" + data.picture ||
+                  "images/avatar/avatar-12.jpg";
               });
-
 
               accountBalance.forEach((bal) => {
                 bal.innerHTML = data.userBalance;
@@ -3658,12 +3649,11 @@
           }),
         });
 
-        if(res.status == 200) {
+        if (res.status == 200) {
           const data = await res.text();
           console.log(data);
           iqwerty.toast.toast("Your request is under review");
         }
-        
       }
 
       async function transferToOtherUsers() {
@@ -3695,6 +3685,164 @@
           console.log(error);
         }
       }
+
+      async function getHistory() {
+        const h = await fetch(baseUrl + "bill/transactionhistory", {
+          method: "GET",
+          headers: {
+            accesstoken: localStorage.getItem("Authorization"),
+          },
+        });
+
+        const data = await h.json();
+
+        console.log(data);
+
+        if (h.status == 200) {
+          userHistory.innerHTML = "";
+
+
+
+          data.userTransactionHistory.forEach((d) => {
+
+            if(d.tType == "deposit") {
+              // Cash fund request
+
+              userHistory.innerHTML += `
+              <div class="flex cursor-pointer items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                      <div>
+                        <p
+                          class="text-slate-700 line-clamp-1 dark:text-navy-100"
+                        >
+                          Cash Request
+                        </p>
+                        <p
+                          class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
+                        >
+                          ${d.createdAt}
+                        </p>
+                      </div>
+                    </div>
+                    <p class="font-medium text-success">$${d.amount}</p>
+                  </div>
+              `;
+
+              
+
+            } if(d.tType == "withdraw") {
+              // Withdrawal fund request
+
+              userHistory.innerHTML += `
+              <div class="flex cursor-pointer items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                      <div>
+                        <p
+                          class="text-slate-700 line-clamp-1 dark:text-navy-100"
+                        >
+                          Withdraw Request (${d.approved == true && d.rejected == false ? "Approved" : ""} ${d.approved == false && d.rejected == false ? "Pending" : ""} ${d.approved == false && d.rejected == true ? "Declined" : ""})
+                        </p>
+                        <p
+                          class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
+                        >
+                          ${d.createdAt}
+                        </p>
+                      </div>
+                    </div>
+                    ${d.approved == false && d.rejected == true ? `<p class="font-medium text-error">$${d.amount}</p>` : `<p class="font-medium text-success">$${d.amount}</p>`}
+                  </div>
+              `;
+
+            } if(d.tType == "transfer") {
+              // Transaction Histories
+
+              if(d.from == data.userid) {
+                userHistory.innerHTML += `
+              <div class="flex cursor-pointer items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                      <div>
+                        <p
+                          class="text-slate-700 line-clamp-1 dark:text-navy-100"
+                        >
+                          Transfer Sent
+                        </p>
+                        <p
+                          class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
+                        >
+                          ${d.createdAt}
+                        </p>
+                      </div>
+                    </div>
+                    <p class="font-medium text-success">$${d.amount}</p>
+                  </div>
+              `;
+              } else if(d.to == data.userid) {
+                userHistory.innerHTML += `
+              <div class="flex cursor-pointer items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                      <div>
+                        <p
+                          class="text-slate-700 line-clamp-1 dark:text-navy-100"
+                        >
+                          Transfer Received
+                        </p>
+                        <p
+                          class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
+                        >
+                          ${d.createdAt}
+                        </p>
+                      </div>
+                    </div>
+                    <p class="font-medium text-success">$${d.amount}</p>
+                  </div>
+              `;
+              }
+            }
+
+          //   userHistory.innerHTML += `
+
+          // <div class="flex cursor-pointer items-center justify-between">
+          //           <div class="flex items-center space-x-3">
+          //             <div>
+          //               <p
+          //                 class="text-slate-700 line-clamp-1 dark:text-navy-100"
+          //               >
+          //                 Derrick Simmons
+          //               </p>
+          //               <p
+          //                 class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
+          //               >
+          //                 Dec 16, 2021 - 14:45
+          //               </p>
+          //             </div>
+          //           </div>
+          //           <p class="font-medium text-success">$674.63</p>
+          //         </div>
+
+
+          // <div class="flex cursor-pointer items-center justify-between">
+          //           <div class="flex items-center space-x-3">
+          //             <div>
+          //               <p
+          //                 class="text-slate-700 line-clamp-1 dark:text-navy-100"
+          //               >
+          //                 Kartina West
+          //               </p>
+          //               <p
+          //                 class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
+          //               >
+          //                 Dec 13, 2021 - 11:30
+          //               </p>
+          //             </div>
+          //           </div>
+          //           <p class="font-medium text-error">$547.63</p>
+          //         </div>
+          // `;
+          });
+        }
+      }
+
+      getHistory();
     </script>
   </body>
 </html>
