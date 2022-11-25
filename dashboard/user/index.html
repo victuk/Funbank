@@ -162,11 +162,12 @@
                         <a
                           href="#"
                           class="text-base font-medium text-slate-700 hover:text-primary focus:text-primary dark:text-navy-100 dark:hover:text-accent-light dark:focus:text-accent-light"
-                        >
-                          User
+                          id="usersName"
+                          >
+                          
                         </a>
                         <p class="text-xs text-slate-400 dark:text-navy-300">
-                          DevOps Relation
+                          Verified user
                         </p>
                       </div>
                     </div>
@@ -3205,6 +3206,7 @@
       let fullname = document.getElementById("fullname");
       let profileImage = document.querySelectorAll(".profileImage");
       let userHistory = document.getElementById("userHistory");
+      let usersName = document.getElementById("usersName");
 
       function getDashboardComponents() {
         fetch(baseUrl + "bill/accountbalance", {
@@ -3223,6 +3225,7 @@
 
             if (response.status == 200) {
               fullname.innerText = `${data.firstName}`;
+              usersName.innerText = `${data.firstName}`;
 
               console.log(profileImage);
 
