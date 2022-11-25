@@ -3228,7 +3228,7 @@
 
               profileImage.forEach((p) => {
                 console.log(p);
-                p.src = data.picture ? baseUrl + "uploads/" + data.picture : "../../images/avatar.svg";
+                p.src = data.picture ? baseUrl.split(0, -3) + "uploads/" + data.picture : "../../images/avatar.svg";
               });
 
               accountBalance.forEach((bal) => {
