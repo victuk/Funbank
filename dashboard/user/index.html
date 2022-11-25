@@ -132,10 +132,7 @@
                   x-ref="popperRef"
                   class="avatar h-12 w-12"
                 >
-                  <img
-                    class="rounded-full profileImage"
-                    alt="Profile Image"
-                  />
+                  <img class="rounded-full profileImage" alt="Profile Image" />
                   <span
                     class="absolute right-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-success dark:border-navy-700"
                   ></span>
@@ -163,8 +160,7 @@
                           href="#"
                           class="text-base font-medium text-slate-700 hover:text-primary focus:text-primary dark:text-navy-100 dark:hover:text-accent-light dark:focus:text-accent-light"
                           id="usersName"
-                          >
-                          
+                        >
                         </a>
                         <p class="text-xs text-slate-400 dark:text-navy-300">
                           Verified user
@@ -2667,7 +2663,6 @@
               </div>
             </div>
           </div>
-          
 
           <!-- Send Money -->
           <div class="card col-span-12 px-4 pb-5 sm:px-5 lg:col-span-4">
@@ -2981,7 +2976,6 @@
               </div>
             </div>
           </div>
-
         </div>
       </main>
     </div>
@@ -3027,20 +3021,14 @@
           .then(async (response) => {
             const data = await response.json();
 
-            console.log(data);
-
-            console.log(data.userBalance);
-            console.log(localStorage.getItem("auth"));
-
             if (response.status == 200) {
               fullname.innerText = `${data.firstName}`;
               usersName.innerText = `${data.firstName}`;
 
-              console.log(profileImage);
-
               profileImage.forEach((p) => {
-                console.log(p);
-                p.src = data.picture ? baseUrl.slice(0, -3) + "uploads/" + data.picture : "../../images/avatar.svg";
+                p.src = data.picture
+                  ? baseUrl.slice(0, -3) + "uploads/" + data.picture
+                  : "../../images/avatar.svg";
               });
 
               accountBalance.forEach((bal) => {
@@ -3051,6 +3039,7 @@
           })
           .catch((e) => {
             console.log(e);
+            iqwerty.toast.toast("An error occurred while trying to initialize the dashboard.");
           });
 
         fetch(baseUrl + "bill/history", {
@@ -3063,7 +3052,6 @@
             const data = await response.json();
 
             if (response.status == 200) {
-              console.log(data);
 
               if (data.income.length == 0) {
                 income.innerHTML = 0;
@@ -3107,12 +3095,10 @@
             );
           }
         } catch (error) {
-          iqwerty.toast.toast("An error occurred");
+          iqwerty.toast.toast("An error occurred.");
           console.log(error);
         }
       }
-
-      
 
       async function transferToOtherUsers() {
         try {
@@ -3152,9 +3138,7 @@
           },
         });
 
-        const data = await h.json();
-
-        console.log(data);
+        let data = await h.json();
 
         if (h.status == 200) {
           userHistory.innerHTML = "";
@@ -3162,7 +3146,11 @@
           if (data.userTransactionHistory.length == 0) {
             userHistory.innerHTML = `<div>No Recent Transaction</div>`;
           } else {
-            data.userTransactionHistory.forEach((d) => {
+            let sortedData = data.userTransactionHistory.sort(function (a, b) {
+              return new Date(b.createdAt) - new Date(a.createdAt);
+            });
+
+            sortedData.forEach((d) => {
               if (d.tType == "deposit") {
                 // Cash fund request
 
@@ -3185,8 +3173,7 @@
         <p class="font-medium text-success">$${d.amount}</p>
       </div>
   `;
-              }
-              if (d.tType == "withdraw") {
+              } else if (d.tType == "withdraw") {
                 // Withdrawal fund request
 
                 userHistory.innerHTML += `
@@ -3218,8 +3205,7 @@
         }
       </div>
   `;
-              }
-              if (d.tType == "transfer") {
+              } else if (d.tType == "transfer") {
                 // Transaction Histories
 
                 if (d.from == data.userid) {
@@ -3324,7 +3310,6 @@
 
         if (res.status == 200) {
           const data = await res.text();
-          console.log(data);
           iqwerty.toast.toast("Your request is under review");
           setTimeout(() => {
             getHistory();
@@ -3336,7 +3321,6 @@
         localStorage.removeItem("Authorization");
         location.assign("/login.html");
       }
-
     </script>
   </body>
 </html>

@@ -3122,7 +3122,6 @@
 
         const details = await res.json();
 
-        console.log(details);
         bal.innerText = details.adminBalance;
         baltwo.innerText = details.adminBalance;
         accountNumber.innerText =
@@ -3136,9 +3135,11 @@
         });
 
         const userCountDetails = await userCount.json();
-
-        console.log(userCountDetails);
-        totalUsers.innerText = userCountDetails;
+        if(userCount.status == 200) {
+          totalUsers.innerText = userCountDetails;
+        } else {
+          iqwerty.toast.toast("An error occurred trying to get user count.");
+        }
       }
 
       getDashboardComp();
@@ -3155,9 +3156,6 @@
         );
 
         const data = await withdrawalRequests.json();
-
-        console.log("Here");
-        console.log(data);
 
         if (withdrawalRequests.status == 200) {
           showTransactionRequests.innerHTML = "";
@@ -3193,7 +3191,6 @@
       getWithdrawalRequests();
 
       async function approveDecision(id, accountNumber, decision) {
-        console.log(id, accountNumber, decision);
 
         try {
           let transactions = await fetch(baseUrl + "bill/decide", {
@@ -3211,7 +3208,6 @@
 
           if (transactions.status == 200) {
             const data = await transactions.text();
-            console.log("Backend data", data);
             iqwerty.toast.toast("Successful! Reloading, please wait...");
             setTimeout(() => {
               location.reload();
@@ -3229,13 +3225,16 @@
       function showTransactions(t) {
         transactionsSection.innerHTML = "";
 
-        console.log(t);
-
         if (t.length == 0) {
           transactionsSection.innerHTML = `No recent transaction.`;
+          return;
         }
 
-        for (i = 0; i < t.length; i++) {
+        let sortedData = t.sort(function (a, b) {
+              return new Date(b.createdAt) - new Date(a.createdAt);
+            });
+
+        for (i = 0; i < sortedData.length; i++) {
           transactionsSection.innerHTML += `
         <div class="flex cursor-pointer items-center justify-between">
                     <div class="flex items-center space-x-3">
@@ -3257,7 +3256,10 @@
       }
 
       async function getTransactions() {
-        let transactions = await fetch(baseUrl + "bill/transactions", {
+
+        try {
+          
+          let transactions = await fetch(baseUrl + "bill/transactions", {
           method: "GET",
           headers: {
             accesstoken: localStorage.getItem("Authorization"),
@@ -3267,6 +3269,12 @@
         let allTransactions = await transactions.json();
 
         showTransactions(allTransactions.reverse());
+
+        } catch (error) {
+          iqwerty.toast.toast("An error occurred while trying to get transaction history.");
+        }
+
+        
       }
 
       getTransactions();
@@ -3285,10 +3293,13 @@
         });
 
         const v = await result.json();
-        console.log(v);
-        showTransactions(v.transactions.reverse());
+
+        if(result.status = 200) {
+          showTransactions(v.transactions);
         bal.innerText = v.newAdminBalance;
         baltwo.innerText = v.newAdminBalance;
+        iqwerty.toast.toast("$" + sendAmountValue.value + " Transfer Successful");
+        }
       }
 
       sendAmountValue.addEventListener("keyup", function (e) {
