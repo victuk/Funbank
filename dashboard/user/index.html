@@ -3026,7 +3026,7 @@
               usersName.innerText = `${data.firstName}`;
 
               profileImage.forEach((p) => {
-                p.src = data.picture
+                p.src = data.picture && data.picture != ""
                   ? baseUrl.slice(0, -3) + "uploads/" + data.picture
                   : "../../images/avatar.svg";
               });
