@@ -3026,9 +3026,12 @@
               usersName.innerText = `${data.firstName}`;
 
               profileImage.forEach((p) => {
-                p.src = data.picture && data.picture != ""
-                  ? baseUrl.slice(0, -3) + "uploads/" + data.picture
-                  : "../../images/avatar.svg";
+                // p.src = data.picture && data.picture != ""
+                //   ? baseUrl.slice(0, -3) + "uploads/" + data.picture
+                //   : "../../images/avatar.svg";
+
+                p.src = "../../images/avatar.svg";
+
               });
 
               accountBalance.forEach((bal) => {
