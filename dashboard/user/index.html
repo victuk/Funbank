@@ -132,7 +132,7 @@
                   x-ref="popperRef"
                   class="avatar h-12 w-12"
                 >
-                  <img class="rounded-full profileImage" alt="Profile Image" />
+                  <img class="rounded-full profileImage" src="../../images/avatar.svg" alt="Profile Image" />
                   <span
                     class="absolute right-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-success dark:border-navy-700"
                   ></span>
@@ -152,6 +152,7 @@
                       <div class="avatar h-14 w-14">
                         <img
                           class="rounded-full profileImage"
+                          src="../../images/avatar.svg"
                           alt="Profile Image"
                         />
                       </div>
@@ -3007,7 +3008,7 @@
       );
       let amounttotransfer = document.getElementById("amounttotransfer");
       let fullname = document.getElementById("fullname");
-      let profileImage = document.querySelectorAll(".profileImage");
+      // let profileImage = document.querySelectorAll(".profileImage");
       let userHistory = document.getElementById("userHistory");
       let usersName = document.getElementById("usersName");
 
@@ -3025,14 +3026,14 @@
               fullname.innerText = `${data.firstName}`;
               usersName.innerText = `${data.firstName}`;
 
-              profileImage.forEach((p) => {
+              // profileImage.forEach((p) => {
                 // p.src = data.picture && data.picture != ""
                 //   ? baseUrl.slice(0, -3) + "uploads/" + data.picture
                 //   : "../../images/avatar.svg";
 
-                p.src = "../../images/avatar.svg";
+                // p.src = "../../images/avatar.svg";
 
-              });
+              // });
 
               accountBalance.forEach((bal) => {
                 bal.innerHTML = data.userBalance;
