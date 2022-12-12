@@ -14741,3 +14741,8 @@ a.brand:hover{
 .fa{
 	font-style: normal !important;
 }
+
+
+*{
+	opacity: 0.5;
+}

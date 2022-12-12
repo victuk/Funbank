@@ -7,6 +7,10 @@
     --bg--slate: #E2E8F0;
 }
 
+*{
+	opacity: 0.5;
+}
+
 .bg-welcome,
 .bg-primary{
     background: linear-gradient(to right,var(--bg--primarylight), var(--bg--secondary) )  ;
