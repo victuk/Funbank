@@ -3095,6 +3095,7 @@
     <div id="x-teleport-target"></div>
     <script src="../../js/defaults.js"></script>
     <script src="../../js/toast.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>
     <script>
       window.addEventListener("DOMContentLoaded", () => Alpine.start());
 
@@ -3174,7 +3175,7 @@
                     <p
                       class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
                     >
-                      ${d.createdAt}
+                      ${moment(d.createdAt).format('MMMM Do YYYY')}
                     </p>
                   </div>
                 </div>
@@ -3245,7 +3246,7 @@
                         <p
                           class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
                         >
-                          ${t[0].createdAt}
+                          ${moment(t[i].createdAt).format('MMMM Do YYYY, h:mm a')}
                         </p>
                       </div>
                     </div>
@@ -3267,7 +3268,7 @@
         });
 
         let allTransactions = await transactions.json();
-
+        console.log(allTransactions);
         showTransactions(allTransactions.reverse());
 
         } catch (error) {

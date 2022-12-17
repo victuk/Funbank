@@ -271,7 +271,7 @@
                     <li>
                       <a
                         x-data="navLink"
-                        href="dashboard-user.html"
+                        href="index.html"
                         :class="isActive ? 'font-medium text-primary dark:text-accent-light' : 'text-slate-500 hover:text-slate-800 dark:text-navy-200 dark:hover:text-navy-50'"
                         class="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4"
                       >
@@ -282,6 +282,11 @@
                           <span>My Dashboard</span>
                         </div>
                       </a>
+                    </li>
+                    <li>
+                      <div style="padding: 20px 0;">
+                        Contact the admin for withdrawals
+                      </div>
                     </li>
                   </ul>
                 </li>
@@ -2988,6 +2993,7 @@
 
     <script src="../../js/defaults.js"></script>
     <script src="../../js/toast.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <script>
       window.addEventListener("DOMContentLoaded", () => Alpine.start());
 
@@ -3104,36 +3110,6 @@
         }
       }
 
-      async function transferToOtherUsers() {
-        try {
-          const res = await fetch(baseUrl + "bill/transferbetweenusers", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              accesstoken: localStorage.getItem("Authorization"),
-            },
-            body: JSON.stringify({
-              accountnumbertotransferto: accountnumbertotransferto.value,
-              amounttotransfer: amounttotransfer.value,
-            }),
-          });
-
-          if (res.status == 200) {
-            const data = await res.json();
-            iqwerty.toast.toast("Transfer Successful");
-            accountBalance.forEach((b) => {
-              b.innerHTML = data.newAccountBalance;
-            });
-          } else {
-            const d = await res.text();
-            iqwerty.toast.toast(d);
-          }
-        } catch (error) {
-          iqwerty.toast.toast("An error occurred.");
-          console.log(error);
-        }
-      }
-
       async function getHistory() {
         const h = await fetch(baseUrl + "bill/transactionhistory", {
           method: "GET",
@@ -3170,7 +3146,7 @@
             <p
               class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
             >
-              ${d.createdAt}
+              ${moment(d.createdAt).format('MMMM Do YYYY, h:mm a')}
             </p>
           </div>
         </div>
@@ -3194,11 +3170,14 @@
                 } ${
                   d.approved == false && d.rejected == true ? "Declined" : ""
                 })
+                <div>
+                  <small>${d.approved == false && d.rejected == false ? "Kindly chat the admin for withdrawal." : ""}</small>
+                </div>
             </p>
             <p
               class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
             >
-              ${d.createdAt}
+            ${moment(d.createdAt).format('MMMM Do YYYY, h:mm a')}
             </p>
           </div>
         </div>
@@ -3225,7 +3204,7 @@
             <p
               class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
             >
-              ${d.createdAt}
+            ${moment(d.createdAt).format('MMMM Do YYYY, h:mm a')}
             </p>
           </div>
         </div>
@@ -3245,7 +3224,7 @@
             <p
               class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200"
             >
-              ${d.createdAt}
+            ${moment(d.createdAt).format('MMMM Do YYYY, h:mm a')}
             </p>
           </div>
         </div>
@@ -3299,6 +3278,37 @@
       }
 
       getHistory();
+
+      async function transferToOtherUsers() {
+        try {
+          const res = await fetch(baseUrl + "bill/transferbetweenusers", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              accesstoken: localStorage.getItem("Authorization"),
+            },
+            body: JSON.stringify({
+              accountnumbertotransferto: accountnumbertotransferto.value,
+              amounttotransfer: amounttotransfer.value,
+            }),
+          });
+
+          if (res.status == 200) {
+            const data = await res.json();
+            iqwerty.toast.toast("Transfer Successful");
+            accountBalance.forEach((b) => {
+              b.innerHTML = data.newAccountBalance;
+            });
+            getHistory();
+          } else {
+            const d = await res.text();
+            iqwerty.toast.toast(d);
+          }
+        } catch (error) {
+          iqwerty.toast.toast("An error occurred.");
+          console.log(error);
+        }
+      }
 
       async function withdrawRequest() {
         const res = await fetch(baseUrl + "bill/requestwithdrawal", {
